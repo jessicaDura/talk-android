@@ -261,9 +261,6 @@ class OfflineFirstChatRepository @Inject constructor(
     override fun updateRoomMessages(roomToken: String, limit: Int) {
         scope.launch {
             Log.d(TAG, "---- updateRoomMessages ------------")
-
-            delay(200)
-
             val fieldMap = getFieldMap(
                 lookIntoFuture = false,
                 timeout = 0,
