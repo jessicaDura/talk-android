@@ -476,17 +476,17 @@ class ConversationsListActivity :
             unreadMessages
         }
 
-        val result = current.map {  (model, unreadMessages) ->
+        val result = current.map { (model, unreadMessages) ->
             val previousUnreadMessages = previous[model.token] // Check if this conversation exists in last list
             previousUnreadMessages?.let {
                 Pair(model, unreadMessages - previousUnreadMessages)
             }
         }.filterNotNull()
 
-        val url = userManager.currentUser.blockingGet().baseUrl!!
+        val baseUrl = userManager.currentUser.blockingGet().baseUrl!!
         for (pair in result) {
             if (pair.second > 0) {
-                conversationsListViewModel.updateRoomMessages(pair.first, pair.second, credentials!!, url)
+                conversationsListViewModel.updateRoomMessages(pair.first, pair.second, credentials!!, baseUrl)
             }
         }
     }

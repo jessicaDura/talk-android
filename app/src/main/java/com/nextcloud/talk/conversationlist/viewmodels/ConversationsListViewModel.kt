@@ -16,6 +16,7 @@ import com.nextcloud.talk.invitation.data.InvitationsModel
 import com.nextcloud.talk.invitation.data.InvitationsRepository
 import com.nextcloud.talk.models.domain.ConversationModel
 import com.nextcloud.talk.users.UserManager
+import com.nextcloud.talk.utils.ApiUtils
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -88,7 +89,9 @@ class ConversationsListViewModel @Inject constructor(
     }
 
     fun updateRoomMessages(model: ConversationModel, limit: Int, credentials: String, baseUrl: String) {
-        // TODO need to edit fetch init messages to include a limit this is rough
+        val urlForChatting = ApiUtils.getUrlForChat(1, baseUrl, model.token) // FIXME v1?
+        chatRepository.setData(model, credentials, urlForChatting)
+        chatRepository.updateRoomMessages(model.token, limit)
     }
 
     inner class FederatedInvitationsObserver : Observer<InvitationsModel> {
