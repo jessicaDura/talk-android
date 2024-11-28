@@ -70,9 +70,9 @@ class ListOpenConversationsActivity : BaseActivity() {
         }
         binding.searchEdit.doOnTextChanged { text, _, _, count ->
             adapter.filter(text.toString())
-            if(text.toString().isNotEmpty() && searching){
+            if (text.toString().isNotEmpty() && searching) {
                 binding.clearSearchButton.visibility = View.VISIBLE
-            }else{
+            } else {
                 binding.clearSearchButton.visibility = View.GONE
             }
         }
@@ -98,10 +98,10 @@ class ListOpenConversationsActivity : BaseActivity() {
         }
     }
 
-    private fun showOrHideClearButton(){
+    private fun showOrHideClearButton() {
         if (!binding.searchEdit.text.isNullOrEmpty()) {
             binding.clearSearchButton.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.clearSearchButton.visibility = View.GONE
         }
     }
