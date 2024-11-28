@@ -70,6 +70,16 @@ class ListOpenConversationsActivity : BaseActivity() {
         }
         binding.searchEdit.doOnTextChanged { text, _, _, count ->
             adapter.filter(text.toString())
+            if(text.toString().isNotEmpty()){
+                binding.clearSearchButton.visibility = View.VISIBLE
+            }else{
+                binding.clearSearchButton.visibility = View.GONE
+            }
+            binding.clearSearchButton.setOnClickListener {
+                binding.searchEdit.setText("")
+                adapter.filter("")
+                binding.clearSearchButton.visibility = View.GONE
+            }
         }
 
         initObservers()
