@@ -70,7 +70,7 @@ class ListOpenConversationsActivity : BaseActivity() {
         }
         binding.searchEdit.doOnTextChanged { text, _, _, count ->
             adapter.filter(text.toString())
-            if(text.toString().isNotEmpty()){
+            if(text.toString().isNotEmpty() && searching){
                 binding.clearSearchButton.visibility = View.VISIBLE
             }else{
                 binding.clearSearchButton.visibility = View.GONE
@@ -90,12 +90,18 @@ class ListOpenConversationsActivity : BaseActivity() {
             binding.searchOpenConversations.visibility = View.GONE
             binding.searchEdit.visibility = View.VISIBLE
             binding.searchEdit.showKeyboardAndFocus()
-            if (!binding.searchEdit.text.isNullOrEmpty()) {
-                binding.clearSearchButton.visibility = View.VISIBLE
-            }
+            showOrHideClearButton()
         } else {
             binding.searchOpenConversations.visibility = View.VISIBLE
             binding.searchEdit.visibility = View.GONE
+            binding.clearSearchButton.visibility = View.GONE
+        }
+    }
+
+    private fun showOrHideClearButton(){
+        if (!binding.searchEdit.text.isNullOrEmpty()) {
+            binding.clearSearchButton.visibility = View.VISIBLE
+        }else{
             binding.clearSearchButton.visibility = View.GONE
         }
     }
