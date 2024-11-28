@@ -75,11 +75,11 @@ class ListOpenConversationsActivity : BaseActivity() {
             }else{
                 binding.clearSearchButton.visibility = View.GONE
             }
-            binding.clearSearchButton.setOnClickListener {
-                binding.searchEdit.setText("")
-                adapter.filter("")
-                binding.clearSearchButton.visibility = View.GONE
-            }
+        }
+        binding.clearSearchButton.setOnClickListener {
+            binding.searchEdit.setText("")
+            adapter.filter("")
+            binding.clearSearchButton.visibility = View.GONE
         }
 
         initObservers()
@@ -90,9 +90,13 @@ class ListOpenConversationsActivity : BaseActivity() {
             binding.searchOpenConversations.visibility = View.GONE
             binding.searchEdit.visibility = View.VISIBLE
             binding.searchEdit.showKeyboardAndFocus()
+            if (!binding.searchEdit.text.isNullOrEmpty()) {
+                binding.clearSearchButton.visibility = View.VISIBLE
+            }
         } else {
             binding.searchOpenConversations.visibility = View.VISIBLE
             binding.searchEdit.visibility = View.GONE
+            binding.clearSearchButton.visibility = View.GONE
         }
     }
 
